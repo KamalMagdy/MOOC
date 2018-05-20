@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MOOC</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="text-decoration:none; font-size: x-large " href="/">MOOC</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <% if current_user.present? %>
+
+            <li class="active"><%= link_to 'Courses', courses_path, method: "GET" %><span class="sr-only">(current)</span></li>
+              <li><%= link_to 'Lectures', lectures_path, method: "GET" %></li>
+                <% end %>
+          </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user.present? %>
+
+          <li>
+            <%= link_to 'Sign out', destroy_user_session_path, method: "GET", class: "  btn btn-danger navbar-btn" %>
+          </li>
+        <% else %>
+          <li>
+              <a href="<%= new_user_session_path %>" class="btn btn-primary navbar-btn">Sign In</a>
+          </li>
+          <li>
+            <a href="<%= new_user_registration_path %>" class="btn btn-success navbar-btn">Sign Up</a>
+          </li>
+
+        <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <%= yield %>
+
+</div>
+</body>
+</html>

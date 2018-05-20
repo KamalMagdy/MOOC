@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Lecture:</strong>
+  <%= @lecture.content %>
+</p>
+
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @lecture.attachment %>
+</p>
+
+
+<%= link_to like_lecture_path(@lecture), method: :put do %>
+  Like
+  <%= @lecture.get_upvotes.size %>
+<% end %>
+
+<%= link_to dislike_lecture_path(@lecture), method: :put do %>
+  Dislike
+  <%= @lecture.get_downvotes.size %>
+<% end %>
+<p>
+
+<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
+<%= link_to 'Back', lectures_path %>
+
+<p>
+
+<section class="section comments">
+    <div class="container">
+        <h2 class="subtitle is-5"><strong><%= @lecture.comments.count %></strong> Comments</h2>
+        <%= render @lecture.comments %>
+        <div class="comment-form">
+            <hr />
+            <h3 class="subtitle is-3">Leave a reply</h3>
+             <%= render 'comments/form' %>
+        </div>
+    </div>
+</section>
